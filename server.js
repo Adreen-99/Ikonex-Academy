@@ -9,17 +9,21 @@ import scoreRoutes from "./routes/scoreRoutes.js";
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:5173"
+  origin: [
+    "http://localhost:5173",
+    "https://ikonex-academy-opal.vercel.app"
+  ]
 }));
 
 app.use(express.json());
 
-// Routes only
 app.use("/student", studentRoutes);
 app.use("/subject", subjectRoutes);
 app.use("/stream", streamRoutes);
 app.use("/score", scoreRoutes);
 
-app.listen(5000, () => {
-  console.log("Server running on http://localhost:5000");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
