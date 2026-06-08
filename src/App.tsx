@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
-import Students from "./pages/Students";
-import Subjects from "./pages/Subjects";
-import ClassStream from "./pages/ClassStream";
-import Scores from "./pages/Scores";
+import Dashboard from "../src/pages/Dashboard.js";
+import Students from "../src/pages/Students.js";
+import Subjects from "../src/pages/Subjects.js";
+import ClassStream from "../src/pages/ClassStream.js";
+import Scores from "../src/pages/Scores.js";
 
 function App() {
   const location = useLocation();
