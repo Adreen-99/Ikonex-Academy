@@ -1,5 +1,5 @@
 import api from "./axios";
-import { ClassStream } from "../types/ClassStream";
+import { ClassStream } from "../types/ClassStream.js";
 
 export const getClassStreams = () =>
   api.get<ClassStream[]>("/class-streams");
