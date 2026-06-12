@@ -8,8 +8,21 @@ export const getStudents = async (req, res) => {
 };
 
 export const createStudent = async (req, res) => {
+  const { admissionNumber, firstName, lastName, classStreamId } = req.body;
+
+  if (!admissionNumber || !firstName || !lastName || !classStreamId) {
+    return res.status(400).json({
+      error: "admissionNumber, firstName, lastName, and classStreamId are required",
+    });
+  }
+
   const student = await prisma.student.create({
-    data: req.body,
+    data: {
+      admissionNumber,
+      firstName,
+      lastName,
+      classStreamId: Number(classStreamId),
+    },
   });
   res.json(student);
 };

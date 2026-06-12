@@ -8,8 +8,30 @@ export const getScores = async (req, res) => {
 };
 
 export const createScore = async (req, res) => {
-  const score = await prisma.score.create({
-    data: req.body,
-  });
-  res.json(score);
+  const { studentId, subjectId, assessmentType, score } = req.body;
+
+  if (!studentId || !subjectId || !assessmentType || score === undefined) {
+    return res.status(400).json({
+      error: "studentId, subjectId, assessmentType, and score are required",
+    });
+  }
+
+  try {
+    const created = await prisma.score.create({
+      data: {
+        studentId: Number(studentId),
+        subjectId: Number(subjectId),
+        assessmentType,
+        score: Number(score),
+      },
+    });
+    res.json(created);
+  } catch (err) {
+    if (err.code === "P2002") {
+      return res.status(409).json({
+        error: "A score for this student, subject, and assessment type already exists",
+      });
+    }
+    throw err;
+  }
 };
